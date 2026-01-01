@@ -16,6 +16,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select"
+
 type RegisterData = {
 	name: string;
 	email: string;
@@ -26,19 +34,37 @@ type RegisterData = {
 	confirmPassword: string;
 };
 
+const DEPARTMENTS = [
+	"Architecture",
+	"Chemical Engineering",
+	"Civil Engineering",
+	"Computer Science & Engineering",
+	"Construction Engineering",
+	"Electrical Engineering",
+	"Electronics & Telecommunication Engineering",
+	"Food Technology & Biochemical Engineering",
+	"Information Technology",
+	"Instrumentation & Electronics Engineering",
+	"Mechanical Engineering",
+	"Metallurgical & Material Engineering",
+	"Pharmaceutical Technology",
+	"Power Engineering",
+	"Printing Engineering",
+	"Production Engineering",
+] as const;
+
 export default function Register() {
 	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 	// const [user, setUser] = useState(null);
 
 	const [showPassword, setShowPassword] = useState(false);
-	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 	const {
 		// register,
 		handleSubmit,
 		control,
-		// watch,
+		watch,
 		formState: { errors, isValid },
 	} = useForm<RegisterData>({
 		mode: "onChange",
@@ -126,27 +152,46 @@ export default function Register() {
 								<FormField control={control} name="phone" render={({ field }) => (
 									<FormItem>
 										<FormControl>
-											<Input {...field} placeholder="Enter your phone number"
+											<Input {...field}
+												type="tel"
+												placeholder="Enter your phone number"
 												className="bg-white/30 text-black placeholder-white/80 border-white/40 focus:border-cyan-300" />
 										</FormControl>
 										<FormMessage>{errors.phone?.message}</FormMessage>
 									</FormItem>
 								)} />
 
-								<FormField control={control} name="department" render={({ field }) => (
-									<FormItem>
-										<FormControl>
-											<Input {...field} placeholder="Enter your department"
-												className="bg-white/30 text-black placeholder-white/80 border-white/40 focus:border-cyan-300" />
-										</FormControl>
-										<FormMessage>{errors.department?.message}</FormMessage>
-									</FormItem>
-								)} />
+								<FormField
+									control={control}
+									name="department"
+									render={({ field }) => (
+										<FormItem>
+											{/* Optional: Add a Label if needed <FormLabel>Department</FormLabel> */}
+											<Select onValueChange={field.onChange} defaultValue={field.value}>
+												<FormControl>
+													<SelectTrigger className="bg-white/30 text-black border-white/40 focus:ring-cyan-300 focus:ring-offset-0 w-full">
+														<SelectValue placeholder="Select your department" className="placeholder-white/80" />
+													</SelectTrigger>
+												</FormControl>
+												<SelectContent>
+													{DEPARTMENTS.map((dept) => (
+														<SelectItem key={dept} value={dept}>
+															{dept}
+														</SelectItem>
+													))}
+												</SelectContent>
+											</Select>
+											<FormMessage>{errors.department?.message}</FormMessage>
+										</FormItem>
+									)}
+								/>
 
 								<FormField control={control} name="year" render={({ field }) => (
 									<FormItem>
 										<FormControl>
-											<Input {...field} placeholder="Enter your year"
+											<Input {...field}
+												type="tel"
+												placeholder="Enter your year of graduation"
 												className="bg-white/30 text-black placeholder-white/80 border-white/40 focus:border-cyan-300" />
 										</FormControl>
 										<FormMessage>{errors.year?.message}</FormMessage>
@@ -171,22 +216,24 @@ export default function Register() {
 									</FormItem>
 								)} />
 
-								<FormField control={control} name="confirmPassword" render={({ field }) => (
-									<FormItem>
-										<FormControl>
-											<div className="relative">
-												<Input {...field} type={showConfirmPassword ? "text" : "password"}
-													placeholder="Confirm your password"
-													className="bg-white/30 text-black placeholder-white/80 border-white/40 focus:border-cyan-300" />
-												<button type="button" className="absolute right-2 top-2 opacity-70"
-													onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-													{showConfirmPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
-												</button>
-											</div>
-										</FormControl>
-										<FormMessage>{errors.confirmPassword?.message}</FormMessage>
-									</FormItem>
-								)} />
+								<FormField
+									control={control}
+									name="confirmPassword"
+									rules={{
+										validate: (value) => value === watch("password") || "Passwords do not match"
+									}}
+									render={({ field }) => (
+										<FormItem>
+											<FormControl>
+												<div className="relative">
+													<Input {...field} type={"password"}
+														placeholder="Confirm your password"
+														className="bg-white/30 text-black placeholder-white/80 border-white/40 focus:border-cyan-300" />
+												</div>
+											</FormControl>
+											<FormMessage>{errors.confirmPassword?.message}</FormMessage>
+										</FormItem>
+									)} />
 
 								<Button type="submit"
 									className="cursor-pointer w-full font-bold text-lg py-2 hover:scale-[1.03] transition-all"
@@ -198,7 +245,7 @@ export default function Register() {
 
 						<p className="mt-4 text-center text-sm">
 							Already Registered?{" "}
-							<Link href="/login" className="text-cyan-300 hover:underline">Login</Link>
+							<Link href="/login" className="text-cyan-800 hover:underline">Login</Link>
 						</p>
 					</CardContent>
 				</Card>
