@@ -1,6 +1,7 @@
 import connectToDatabase from "@/lib/mongodb";
 import User from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
+import { sendAttendanceEmail } from "@/lib/email";
 
 const SECRET_KEY: string = "pQ7z!Gd@2Xy$K9vMn#T5wL&3Hb^JfC";
 
@@ -42,6 +43,13 @@ export async function POST(req: NextRequest) {
         user.attendanceMarkedAt = new Date();
         user.attendance = true;
         await user.save();
+
+        await sendAttendanceEmail(
+            user.email, 
+            user.name, 
+            user.phone, 
+        );
+
         return NextResponse.json({ message: "Attendance marked successfully", success:true }, { status: 200 });
 
     } catch (error) {

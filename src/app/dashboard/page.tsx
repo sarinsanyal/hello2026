@@ -46,7 +46,7 @@ export default function Dashboard() {
         if (rawValue) {
             setIsScanning(false); // Close camera immediately
             setScanError(null);   // Clear previous errors
-            
+
             if (user?.email) {
                 const qrDataWithUserEmail = JSON.stringify({
                     secretKey: rawValue,
@@ -74,7 +74,7 @@ export default function Dashboard() {
                 // SUCCESS: Update local user state immediately!
                 // This triggers the UI to switch to "Attendance Marked Successfully" view
                 setUser(prev => prev ? ({ ...prev, attendance: true }) : null);
-                alert(data.message); 
+                alert(data.message);
             } else {
                 // FAILURE: Show error
                 setScanError(data.error || "Invalid QR Code. Please try again.");
@@ -107,6 +107,9 @@ export default function Dashboard() {
                             <p><strong>Phone:</strong> {user.phone}</p>
                             <p><strong>Department:</strong> {user.department}</p>
                             <p><strong>Year:</strong> {user.year}</p>
+                            <p className="text-gray-800 text-sm">
+                                A Confirmation Email has been sent. Please check your inbox or spam.
+                            </p>
                         </div>
                     </Card>
 
@@ -178,8 +181,13 @@ export default function Dashboard() {
                             )}
                         </div>
                     ) : (
-                        <div className="mt-8 p-4 bg-green-800/20 border border-green-500 text-green-900 rounded-xl font-bold text-xl ">
-                            Attendance Marked Successfully!
+                        <div>
+                            <div className="mt-8 p-4 bg-green-800/20 border border-green-500 text-green-900 rounded-xl font-bold text-xl ">
+                                Attendance Marked Successfully!
+                            </div>
+                            <p className="text-gray-800 text-sm pt-5"> 
+                                A Mail confirming your attendance has been sent. Please keep it safe for lunch.
+                            </p>
                         </div>
                     )}
                 </div>

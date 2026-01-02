@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import User from '@/models/user';
+import { sendRegistrationEmail } from '@/lib/email'; 
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,6 +16,8 @@ export async function POST(req: NextRequest) {
 
     const newUser = new User({ name, email, phone, department, year, password });
     await newUser.save();
+
+    await sendRegistrationEmail(email, name, phone, department);
 
     return NextResponse.json({ message: 'User registered successfully' }, { status: 201 });
   } catch (error) {
