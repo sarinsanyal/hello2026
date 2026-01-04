@@ -89,7 +89,7 @@ export default function OurSignatureEvents(){
                 {speakers.map((speaker, index) => (
                     <div key={index} className="flex flex-col gap-6 group">
                         {/* Image Card */}
-                        <div className="aspect-[3/2] w-full rounded-2xl overflow-hidden bg-gray-100 relative">
+                        <div className="aspect-[3/4] w-full rounded-2xl overflow-hidden bg-gray-100 relative">
                             <Image
                                 src={speaker.image}
                                 alt={speaker.name}
