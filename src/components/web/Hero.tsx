@@ -92,9 +92,9 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
-  const formatTime = (value: number) => {
-    return value < 10 ? `0${value}` : value;
-  };
+  // const formatTime = (value: number) => {
+  //   return value < 10 ? `0${value}` : value;
+  // };
 
   return (
     <div ref={heroRef} className="relative min-h-screen w-full bg-black overflow-hidden flex flex-col font-sans">
