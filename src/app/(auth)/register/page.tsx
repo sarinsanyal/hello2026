@@ -266,7 +266,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "sonner"
 
-import { ArrowRight, User, Mail } from "lucide-react";
+import { ArrowRight, User, Mail, Building } from "lucide-react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -275,6 +275,7 @@ type RegisterData = {
   name: string;
   email: string;
   phone: string;
+  university: string;
   department: string;
   year: string;
   password: string;
@@ -297,7 +298,8 @@ const DEPARTMENTS = [
   "Pharmaceutical Technology",
   "Power Engineering",
   "Printing Engineering",
-  "Production Engineering"
+  "Production Engineering",
+  "Others"
 ] as const;
 
 /* Yup Schema */
@@ -316,6 +318,11 @@ const schema: yup.ObjectSchema<RegisterData> = yup.object({
     .string()
     .matches(/^[0-9]{10}$/, "Enter a valid 10-digit phone number")
     .required("Phone is required"),
+
+    university: yup
+    .string()
+    .trim()
+    .required("University/College is required"),
 
   department: yup
     .string()
@@ -414,7 +421,7 @@ export default function Register() {
   };
 
   const borderText =
-    "REGISTER FOR THINK FORWARD SUMMIT 2025 • JOIN THE REVOLUTION • SECURE YOUR SPOT • ";
+    "REGISTER FOR HELLO IEEE 2026 • SECURE YOUR SPOT • JOIN IEEE • ";
   const repeatedText = borderText.repeat(20);
 
   return (
@@ -495,6 +502,22 @@ export default function Register() {
             <p className="text-red-400 text-sm">{errors.email?.message}</p>
           </div>
 
+         {/* NAME */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
+              University / College
+            </label>
+            <div className="relative">
+              <Building className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+              <input
+                {...register("university")}
+                className="w-full bg-white/5 border border-white/10 rounded-lg py-4 pl-12 pr-4 focus:border-[#3B82F6]"
+                placeholder="College"
+              />
+            </div>
+            <p className="text-red-400 text-sm">{errors.name?.message}</p>
+          </div>
+
           {/* DEPARTMENT */}
           <div className="space-y-2">
             <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
@@ -525,7 +548,7 @@ export default function Register() {
             <input
               {...register("phone")}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-4 px-4 focus:border-[#3B82F6]"
-              placeholder="9876543210"
+              placeholder="XXXXXXXXXX"
             />
             <p className="text-red-400 text-sm">{errors.phone?.message}</p>
           </div>

@@ -111,7 +111,7 @@ export default function Hero() {
         <div className="hero-ui w-full flex justify-center lg:justify-start pt-8 md:pt-12">
           <div className="flex items-center gap-4">
             <span className="text-lg md:text-2xl font-mono font-medium tracking-wider text-white/90 text-center lg:text-left">
-              21 JANUARY 2026 | Triguna Sen Auditorium
+              XX JANUARY 2026 | Triguna Sen Auditorium
             </span>
           </div>
         </div>

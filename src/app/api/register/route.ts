@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   try {
     await connectToDatabase();
 
-    const { name, email, phone, department, year, password } = await req.json();
+    const { name, email, phone, department, year, password, university } = await req.json();
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
       name,
       email,
       phone,
+      university,
       department,
       year,
       password,

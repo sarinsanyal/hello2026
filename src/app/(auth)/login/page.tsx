@@ -306,7 +306,7 @@ export default function Login() {
   }, []);
 
   const borderText =
-    "ATTENDEE PORTAL • ACCESS YOUR TICKET • NETWORK WITH PEERS • ";
+    "LOGIN PORTAL • WELCOME BACK • JOIN IEEE • ";
   const repeatedText = borderText.repeat(25);
 
   return (

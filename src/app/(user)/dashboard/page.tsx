@@ -240,7 +240,8 @@ import {
   KeyRound,
   Lightbulb,
   QrCode,
-  ShieldCheck
+  ShieldCheck,
+  University
 } from "lucide-react";
 
 import gsap from "gsap";
@@ -255,6 +256,7 @@ export default function Dashboard() {
     phone: string;
     department: string;
     year: string;
+    university: string;
   }
 
   const [user, setUser] = useState<UserType | null>(null);
@@ -402,6 +404,7 @@ async function handleSubmit() {
         { label: "Name", value: user.name, icon: User },
         { label: "Email", value: user.email, icon: Mail },
         { label: "Phone", value: user.phone, icon: Phone },
+        { label: "University", value: user.university, icon: University },
         { label: "Department", value: user.department, icon: Building },
         { label: "Year", value: user.year, icon: Calendar }
       ]
@@ -539,7 +542,7 @@ async function handleSubmit() {
                 </div>
 
                 {/* Confirmation tip */}
-                <div className="mt-10 p-5 rounded-xl bg-gradient-to-r from-blue-900/10 to-transparent border border-blue-500/10 flex gap-4">
+                <div className="my-5 p-5 rounded-xl bg-gradient-to-r from-blue-900/10 to-transparent border border-blue-500/10 flex gap-4">
                     <div className="w-8 h-8 shrink-0 flex items-center justify-center bg-blue-500/20 rounded-full animate-pulse">
                       <Lightbulb className="w-4 h-4 text-blue-400" />
                     </div>
@@ -548,7 +551,6 @@ async function handleSubmit() {
                       Check your inbox or spam folder.
                     </p>
                 </div>
-
               </div>
             </div>
 
@@ -609,7 +611,7 @@ async function handleSubmit() {
                 </div>
               ) : (
                 <div className="bg-green-900/10 border border-green-500 rounded-2xl p-6 font-bold text-center text-green-300">
-                  Attendance Marked Successfully
+                  Attendance Marked Successfully!
                   <p className="text-xs mt-2 opacity-70">
                     Confirmation mail sent. Keep it for lunch access.
                   </p>

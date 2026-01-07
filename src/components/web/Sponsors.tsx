@@ -47,6 +47,19 @@ export default function Sponsors() {
                         <div className="logo-pill w-full h-20 md:h-32 border border-dashed border-gray-400 rounded-[3rem] md:rounded-full flex items-center justify-center hover:border-black transition duration-300">
                             <div className="relative w-[70%] h-[65%] flex items-center justify-center">
                                 <Image
+                                    src="/sponsors/sps.png"
+                                    alt="Signal Processing Society"
+                                    fill
+                                    priority
+                                    className="object-contain pointer-events-none select-none"
+                                    sizes="(max-width: 768px) 60vw, 30vw"
+                                />
+                            </div>
+                        </div>
+                        {/* Sponsor Logo — Text / Icon Combo */}
+                        <div className="logo-pill w-full h-20 md:h-32 border border-dashed border-gray-400 rounded-[3rem] md:rounded-full flex items-center justify-center hover:border-black transition duration-300">
+                            <div className="relative w-[70%] h-[65%] flex items-center justify-center">
+                                <Image
                                     src="/sponsors/edwise.png"
                                     alt="Edwise Logo"
                                     fill

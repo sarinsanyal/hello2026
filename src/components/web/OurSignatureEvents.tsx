@@ -95,7 +95,7 @@ export default function OurSignatureEvents(){
                                 alt={speaker.name}
                                 fill
                                 sizes="(min-width: 1024px) 50vw, 100vw"
-                                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500 bg-black"
+                                className="object-cover md:grayscale md:group-hover:grayscale-0 transition-all duration-500 bg-black"
                             />
 
                         </div>
